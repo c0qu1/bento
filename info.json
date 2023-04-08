@@ -1,11 +1,16 @@
 {
   "keyboard_name": "bento",
-  "url": "",
+  "url": "https://github.com/c0qu1/bento",
   "maintainer": "nguyedt",
+  "usb": {
+    "vid": "0x6E67",
+    "pid": "0x2133",
+    "device_version": "1.0.0"
+  },
   "width": 3,
   "height": 2,
   "layouts": {
-    "LAYOUT": {
+    "LAYOUT_only": {
       "layout": [
         {"x":0, "y":0},
         {"x":1, "y":0},

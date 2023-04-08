@@ -15,8 +15,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "config_common.h"
-
 #define QMK_ESC_OUTPUT F1 // usually COL
 #define QMK_ESC_INPUT D5 // usually ROW
 #define QMK_LED B0
@@ -24,13 +22,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AUDIO_PIN C6
 #define AUDIO_CLICKY
 
-/* USB Device descriptor parameter */
-#define VENDOR_ID       0x6E67  // 'NG'uyedt
-#define PRODUCT_ID      0x2133
-#define DEVICE_VER      0x0100
-#define MANUFACTURER    nguyedt
-#define PRODUCT         Bento
-#define DESCRIPTION     2x3 Macropad with Rotary Encoder
 
 /* key matrix size */
 #define MATRIX_ROWS 2
@@ -55,8 +46,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define BACKLIGHT_PIN B6
 #define BACKLIGHT_LEVELS 7
 
-#define RGB_DI_PIN D3
-#ifdef RGB_DI_PIN
+#define WS2812_DI_PIN D3
+#ifdef WS2812_DI_PIN
   #undef RGBLED_NUM
   #define RGBLED_NUM 3
   #define RGBLIGHT_HUE_STEP 8
@@ -66,7 +57,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   #define RGBLIGHT_LIMIT_VAL 128 /* The maximum brightness level */
   #define RGBLIGHT_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
   /*== all animations enable ==*/
-  /* #define RGBLIGHT_ANIMATIONS */
   #define RGBLIGHT_EFFECT_TWINKLE
   #define RGBLIGHT_EFFECT_KNIGHT
   #define RGBLIGHT_EFFECT_KNIGHT_LENGTH 2

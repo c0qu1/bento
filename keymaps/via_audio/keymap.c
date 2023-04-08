@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_MACRO] = LAYOUT(
         C(S(KC_Y)), CK_RST, CK_TOGG,
-        G(S(KC_S)), MU_TOG, KC_CYCLE_LAYERS
+        G(S(KC_S)), MU_TOGG, KC_CYCLE_LAYERS
     ),
     /*
         |               |                        | Knob : Saturation Up/Dn |
@@ -175,9 +175,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
             break;
         case _BROWSER:
-            register_code(KC_LCTRL);
-            clockwise ? tap_code(KC_PGDOWN) : tap_code(KC_PGUP);
-            unregister_code(KC_LCTRL);
+            register_code(KC_LCTL);
+            clockwise ? tap_code(KC_PGDN) : tap_code(KC_PGUP);
+            unregister_code(KC_LCTL);
             break;
         case _INTELLIJ:
             clockwise ? tap_code16(C(A(KC_RGHT))) : tap_code16(C(A(KC_LEFT)));
