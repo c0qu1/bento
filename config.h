@@ -21,14 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define QMK_SPEAKER C6
 #define AUDIO_PIN C6
 
-/* USB Device descriptor parameter */
-#define VENDOR_ID       0x6E67  // 'NG'uyedt
-#define PRODUCT_ID      0x2133
-#define DEVICE_VER      0x0100
-#define MANUFACTURER    nguyedt
-#define PRODUCT         Bento
-//#define DESCRIPTION     2x3 Macropad with Rotary Encoder
-
 /* key matrix size */
 #define MATRIX_ROWS 2
 #define MATRIX_COLS 3
