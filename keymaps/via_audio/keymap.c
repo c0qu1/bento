@@ -18,6 +18,7 @@
 enum layer_names {
   _MEDIA,
   _BROWSER,
+  _INTELLIJ,
   _MACRO,
   _RGBLIGHTS
 };
@@ -47,6 +48,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         S(C(KC_TAB)), C(KC_TAB), KC_CYCLE_LAYERS
     ),
     /*
+        |                  |                     |  Knob : Navigation back/fwd  |
+        |       Back       |   Fwd               |    Press: Implementation/Usages    |
+        |     PrevTab      | NextTab             |   Cycle Layers    |
+     */
+    [_INTELLIJ] = LAYOUT(
+        KC_A, KC_B, KC_WSTP,
+        KC_C, KC_D, KC_CYCLE_LAYERS
+    ),
+    /*
         |               |                        |  Knob : Windows    |
         | Slack Status  |    Zoom Toggle Mute    |     Enter          |
         |  WinScrnSht   |        Task View       |  Cycle Layers      |
@@ -74,12 +84,16 @@ const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 1, HSV_CYAN}
 );
-// Light LED 2 in purple when keyboard layer 2 is active
+// Light LED 1 in green when keyboard layer 2 is active
 const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 1, HSV_GREEN}
+);
+// Light LED 1 in purple when keyboard layer 3 is active
+const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 1, HSV_PURPLE}
 );
-// Light LED 3 in green when keyboard layer 3 is active
-const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+// Light LED 3 in green when keyboard layer 4 is active
+const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 0, HSV_RED}
 );
 
@@ -87,7 +101,8 @@ const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     my_layer0_layer,
     my_layer1_layer,    // Overrides other layers
     my_layer2_layer,    // Overrides other layers
-    my_layer3_layer    // Overrides other layers
+    my_layer3_layer,    // Overrides other layers
+    my_layer4_layer    // Overrides other layers
 );
 
 void keyboard_post_init_user(void) {
@@ -102,8 +117,9 @@ layer_state_t default_layer_state_set_user(layer_state_t state) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(1, layer_state_cmp(state, _BROWSER));
-    rgblight_set_layer_state(2, layer_state_cmp(state, _MACRO));
-    rgblight_set_layer_state(3, layer_state_cmp(state, _RGBLIGHTS));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _INTELLIJ));
+    rgblight_set_layer_state(3, layer_state_cmp(state, _MACRO));
+    rgblight_set_layer_state(4, layer_state_cmp(state, _RGBLIGHTS));
     return state;
 }
 
@@ -112,9 +128,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {
     case KC_CYCLE_LAYERS: //custom macro
       if (record->event.pressed) {
-        //SEND_STRING("I love QMK with VIA!");
         selected_layer++;
-        if(selected_layer > 3) { selected_layer = 0;}
+        if(selected_layer > 4) { selected_layer = 0;}
         layer_clear();
         layer_on(selected_layer);
       }
@@ -164,18 +179,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             clockwise ? tap_code(KC_PGDOWN) : tap_code(KC_PGUP);
             unregister_code(KC_LCTRL);
             break;
+        case _INTELLIJ:
+            clockwise ? tap_code16(C(A(KC_RGHT))) : tap_code16(C(A(KC_LEFT)));
+            break;
         case _MACRO:
-//            if (!clockwise) { register_code(KC_LSFT); }
-//            register_code(KC_LCTRL);
-//            register_code(KC_LALT);
-//            tap_code(KC_TAB);
-//            unregister_code(KC_LCTRL);
-//            unregister_code(KC_LALT);
-//            if(!clockwise) { unregister_code(KC_LSFT); }
             clockwise ? tap_code16(CK_UP) : tap_code16(CK_DOWN);
             break;
         case _RGBLIGHTS:
-            //clockwise ? tap_code(RGB_SAI) : tap_code(RGB_SAD);
             change_RGB(clockwise);
             break;
     }
