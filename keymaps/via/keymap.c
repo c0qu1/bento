@@ -159,9 +159,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
             break;
         case _BROWSER:
-            register_code(KC_LCTRL);
-            clockwise ? tap_code(KC_PGUP) : tap_code(KC_PGDOWN);
-            unregister_code(KC_LCTRL);
+            register_code(KC_LCTL);
+            clockwise ? tap_code(KC_PGUP) : tap_code(KC_PGDN);
+            unregister_code(KC_LCTL);
             break;
         case _MACRO:
             if (!clockwise) { register_code(KC_LSFT); }
