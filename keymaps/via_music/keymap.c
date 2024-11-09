@@ -16,7 +16,7 @@
 #include QMK_KEYBOARD_H
 
 #ifdef AUDIO_ENABLE
-float layer0_song[][2] = SONG(IMPERIAL_MARCH);
+float layer0_song[][2] = SONG(ZELDA_PUZZLE);
 float layer1_song[][2] = SONG(ZELDA_TREASURE);
 float layer2_song[][2] = SONG(ONE_UP_SOUND);
 float layer3_song[][2] = SONG(MARIO_MUSHROOM);
@@ -45,9 +45,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 };
-
+// Light LED 1 in green when keyboard layer 0 is active
 const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 0, HSV_WHITE}
+    {0, 1, HSV_GREEN}
 );
 // Light LED 1 in cyan when keyboard layer 1 is active
 const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -57,7 +57,7 @@ const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 1, HSV_PURPLE}
 );
-// Light LED 3 in green when keyboard layer 3 is active
+// Light LED 3 in red when keyboard layer 3 is active
 const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 0, HSV_RED}
 );
@@ -90,7 +90,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     } else if (get_highest_layer(state) == 3) {
         PLAY_SONG(layer3_song);
     } else {
-        //PLAY_SONG(layer0_song);
+        PLAY_SONG(layer0_song);
     }
     return state;
 }
