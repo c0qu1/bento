@@ -3,6 +3,14 @@
   "url": "https://github.com/c0qu1/bento",
   "maintainer": "nguyedt",
   "manufacturer": "unknown",
+  "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "extrakey": true,
+        "mousekey": false,
+        "nkro": false
+  },
   "usb": {
     "vid": "0x6E67",
     "pid": "0x2133",
